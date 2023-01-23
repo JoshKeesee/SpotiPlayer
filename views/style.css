@@ -23,10 +23,11 @@ footer {
 }
 
 .container {
-  background: linear-gradient(to bottom, limegreen, darkgreen);
+  background: limegreen;
   position: absolute;
   width: 100%;
   height: 100%;
+  transition: 3s;
 }
 
 .main {
