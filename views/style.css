@@ -22,12 +22,25 @@ footer {
   margin: 20px;
 }
 
-.container {
+.shadow {
+  background: linear-gradient(to bottom, transparent, black);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.background {
   background: limegreen;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: 3s;
+}
+
+.container {
   position: absolute;
   width: 100%;
   height: 100%;
-  transition: 3s;
 }
 
 .main {
