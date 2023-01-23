@@ -1,45 +1,76 @@
-var currSong;
+var currSong = new Audio();
 var color;
+var playlist;
+var songInterval = 0;
+var playing = false;
+var raf;
+
+function updateSlider() {
+  raf = requestAnimationFrame(updateSlider);
+
+  document.querySelector(".song-time").max = currSong.duration;
+  document.querySelector(".song-time").value = currSong.currentTime;
+  if (currSong.currentTime) {
+    document.querySelector(".current-time").innerText = toMinutes(Math.trunc(currSong.currentTime));
+    document.querySelector(".total-time").innerText = toMinutes(Math.trunc(currSong.duration));
+  }
+
+  if (currSong.currentTime === currSong.duration) {
+    nextSong();
+  }
+}
+
+document.querySelector(".song-time").addEventListener("input", (event) => {
+  cancelAnimationFrame(raf);
+});
+
+document.querySelector(".song-time").addEventListener("change", (event) => {
+  currSong.currentTime = document.querySelector(".song-time").value;
+
+  requestAnimationFrame(updateSlider);
+});
 
 document.querySelector("#song-input").addEventListener("change", (event) => {
-  const song = event.target.files[0];
-  currSong = new Audio();
-  currSong.src = URL.createObjectURL(song);
-  jsmediatags.read(song, {
-    onSuccess: function(tag) {
-      const data = tag.tags.picture.data;
-      const format = tag.tags.picture.format;
-      let base64String = "";
-      for (let i = 0; i < data.length; i++) {
-        base64String += String.fromCharCode(data[i]);
-      }
-      document.querySelector(".song-img").src = `data:${format};base64,${window.btoa(base64String)}`;
-      document.querySelector(".song-img").onload = () => {
-        color = averageColor(document.querySelector(".song-img"));
-        document.querySelector(".background").style.background = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
-      }
-      document.querySelector(".song-title").innerText = tag.tags.title;
-      document.querySelector(".song-artist").innerText = tag.tags.artist;
-    },
-    onError: function() {
-      document.querySelector(".song-img").src = "album-placeholder.png";
-      document.querySelector(".background").style.background = "limegreen";
-      document.querySelector(".song-title").innerText = song.name;
-      document.querySelector(".song-artist").innerText = "unknown";
-    }
-  });
+  document.querySelector(".song-time").value = "0";
+  playlist = event.target.files;
+  songInterval = 0;
+  currSong.src = URL.createObjectURL(playlist[songInterval]);
+  getSongInfo(playlist[songInterval]);
+  playSong();
 });
 
 function playSong() {
+  raf = requestAnimationFrame(updateSlider)
+  playing = true;
   currSong.play();
   document.querySelector(".play").classList.add("hidden");
   document.querySelector(".pause").classList.remove("hidden");
 }
 
 function pauseSong() {
+  cancelAnimationFrame(raf);
+  playing = false;
   currSong.pause();
   document.querySelector(".play").classList.remove("hidden");
   document.querySelector(".pause").classList.add("hidden");
+}
+
+function previousSong() {
+  songInterval--;
+  if (songInterval < 0) {
+    songInterval = 0;
+  }
+  currSong.src = URL.createObjectURL(playlist[songInterval]);
+  getSongInfo(playlist[songInterval]);
+}
+
+function nextSong() {
+  songInterval++;
+  if (songInterval > Object.keys(playlist).length - 1) {
+    songInterval = Object.keys(playlist).length - 1;
+  }
+  currSong.src = URL.createObjectURL(playlist[songInterval]);
+  getSongInfo(playlist[songInterval]);
 }
 
 function averageColor(imageElement) {
@@ -73,4 +104,45 @@ function averageColor(imageElement) {
   rgb.b = Math.floor(rgb.b / count);
 
   return rgb;
+}
+
+function toMinutes(s) {
+  return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s;
+}
+
+function getSongInfo(song) {
+  document.querySelector(".song-img").style.opacity = 0;
+  jsmediatags.read(song, {
+    onSuccess: function(tag) {
+      const data = tag.tags.picture.data;
+      const format = tag.tags.picture.format;
+      let base64String = "";
+      for (let i = 0; i < data.length; i++) {
+        base64String += String.fromCharCode(data[i]);
+      }
+      setTimeout(() => {
+        document.querySelector(".song-img").style.opacity = 1;
+        document.querySelector(".song-img").src = `data:${format};base64,${window.btoa(base64String)}`;
+      }, 500);
+      document.querySelector(".song-img").onload = () => {
+        color = averageColor(document.querySelector(".song-img"));
+        document.querySelector(".background").style.background = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
+        document.querySelector(".song-img").style.border = "5px solid rgb(" + color.r + "," + color.g + "," + color.b + ")";
+        if (playing) {
+          currSong.play();
+        }
+      }
+      document.querySelector(".song-title").innerText = tag.tags.title;
+      document.querySelector(".song-artist").innerText = tag.tags.artist;
+    },
+    onError: function() {
+      document.querySelector(".song-img").src = "album-placeholder.png";
+      document.querySelector(".background").style.background = "limegreen";
+      document.querySelector(".song-title").innerText = song.name;
+      document.querySelector(".song-artist").innerText = "unknown";
+      setTimeout(() => {
+        document.querySelector(".song-img").style.opacity = 1;
+      }, 500);
+    }
+  });
 }

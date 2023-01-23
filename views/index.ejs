@@ -2,24 +2,29 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audio Player</title>
+    <title>SpotiPlayer</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
+    <script src="jsmediatags.min.js"></script>
   </head>
 
   <body>
     <div class="background"></div>
     <div class="shadow"></div>
     <div class="container">
-      <header>Audio Player</header>
+      <header>SpotiPlayer</header>
       <div class="main">
         <img class="song-img" src="album-placeholder.png">
         <div class="song-info">
           <div class="song-title">Title</div>
           <div class="song-artist">Artist</div>
         </div>
+        <div class="time">
+          <div class="current-time">0:00</div>
+          <input type="range" min="0" max="100" value="0" class="song-time">
+          <div class="total-time">0:00</div>
+        </div>
         <div class="song-controls">
-          <div class="back">
+          <div class="back" onclick="previousSong()">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.405-1.683.977l-7.108-4.062a1.125 1.125 0 010-1.953l7.108-4.062A1.125 1.125 0 0121 8.688v8.123zM11.25 16.811c0 .864-.933 1.405-1.683.977l-7.108-4.062a1.125 1.125 0 010-1.953L9.567 7.71a1.125 1.125 0 011.683.977v8.123z" />
             </svg>
@@ -34,15 +39,16 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
             </svg>
           </div>
-          <div class="forward">
+          <div class="forward" onclick="nextSong()">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062A1.125 1.125 0 013 16.81V8.688zM12.75 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062a1.125 1.125 0 01-1.683-.977V8.688z" />
             </svg>
           </div>
         </div>
-        <input type="file" id="song-input" accept=".mp3, .wav">
+        <input type="file" id="song-input" multiple="true" accept=".mp3, .wav" hidden>
+        <label class="button" for="song-input">Upload Songs</label>
       </div>
-      <footer>&copy; Audio Player, Inc. 2023</footer>
+      <footer>&copy; SpotiPlayer, Inc. 2023 (Totally)</footer>
     </div>
 
     <script src="app.js"></script>
