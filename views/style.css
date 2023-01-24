@@ -46,7 +46,7 @@ footer {
 }
 
 .main {
-  width: 50%;
+  width: 70%;
   margin: 20px auto;
   padding: 10px;
   border-radius: 20px;
@@ -56,6 +56,7 @@ footer {
 
 .song-img {
   margin: 15px auto;
+  max-width: 250px;
   width: 40%;
   height: 40%;
   transition: border 5s, opacity 500ms;
@@ -80,11 +81,11 @@ footer {
 }
 
 .song-controls .play {
-  margin: 0 20px;
+  margin: 0 5%;
 }
 
 .song-controls .pause {
-  margin: 0 20px;
+  margin: 0 5%;
 }
 
 .song-controls svg {
