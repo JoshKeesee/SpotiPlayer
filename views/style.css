@@ -130,6 +130,7 @@ footer {
 
 .song-time {
   width: 100%;
+  margin: auto 12px;
 }
 
 .current-time {
@@ -155,8 +156,7 @@ label:hover {
 }
 
 .time {
-  display: grid;
-  grid-template-columns: 40px auto 40px;
+  display: flex;
 }
 
 .hidden {
