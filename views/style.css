@@ -108,7 +108,16 @@ footer {
   margin-right: auto;
 }
 
+.volume-on .volume-slider {
+  opacity: 0;
+}
+
+.volume-on:hover .volume-slider {
+  opacity: 1;
+}
+
 .volume-slider {
+  transition: 200ms;
   position: absolute;
   transform: translateY(22.5px);
 }
