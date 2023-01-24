@@ -24,7 +24,7 @@ document.querySelector(".song-time").addEventListener("input", (event) => {
 
 document.querySelector(".song-time").addEventListener("change", (event) => {
   currSong.currentTime = document.querySelector(".song-time").value;
-  raf = setInterval(updateSlider, 100);
+  raf = setInterval(updateSlider, 0);
 });
 
 document.querySelector("#song-input").addEventListener("change", (event) => {
@@ -38,7 +38,7 @@ document.querySelector("#song-input").addEventListener("change", (event) => {
 
 function playSong() {
   clearInterval(raf);
-  raf = setInterval(updateSlider, 10);
+  raf = setInterval(updateSlider, 0);
   playing = true;
   currSong.play();
   document.querySelector(".play").classList.add("hidden");
