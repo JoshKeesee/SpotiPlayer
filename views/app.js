@@ -18,6 +18,10 @@ function updateSlider() {
   }
 }
 
+document.querySelector(".volume-slider").addEventListener("change", (event) => {
+  currSong.volume = event.currentTarget.value / 100;
+});
+
 document.querySelector(".song-time").addEventListener("input", (event) => {
   clearInterval(raf);
 });
@@ -69,6 +73,33 @@ function nextSong() {
   }
   currSong.src = URL.createObjectURL(playlist[songInterval]);
   getSongInfo(playlist[songInterval]);
+}
+
+function enableVolume() {
+  currSong.volume = 1;
+  document.querySelector(".volume-on").classList.remove("hidden");
+  document.querySelector(".volume-off").classList.add("hidden");
+}
+
+function disableVolume() {
+  currSong.volume = 0;
+  document.querySelector(".volume-on").classList.add("hidden");
+  document.querySelector(".volume-off").classList.remove("hidden");
+}
+
+function shufflePlaylist() {
+  var keys = Object.keys(playlist);
+  var newPlaylist = {};
+
+  keys.sort(() => {
+    return Math.random() - 0.5;
+  });
+
+  for (var i = 0; i < keys.length; i++) {
+    newPlaylist[i] = playlist[keys[i]];
+  }
+
+  playlist = newPlaylist;
 }
 
 function averageColor(imageElement) {
