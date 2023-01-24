@@ -6,8 +6,6 @@ var playing = false;
 var raf;
 
 function updateSlider() {
-  raf = requestAnimationFrame(updateSlider);
-
   document.querySelector(".song-time").max = currSong.duration;
   document.querySelector(".song-time").value = currSong.currentTime;
   if (currSong.currentTime) {
@@ -21,13 +19,13 @@ function updateSlider() {
 }
 
 document.querySelector(".song-time").addEventListener("input", (event) => {
-  cancelAnimationFrame(raf);
+  clearInterval(raf);
 });
 
 document.querySelector(".song-time").addEventListener("change", (event) => {
   currSong.currentTime = document.querySelector(".song-time").value;
 
-  requestAnimationFrame(updateSlider);
+  raf = setInterval(updateSlider, 100);
 });
 
 document.querySelector("#song-input").addEventListener("change", (event) => {
@@ -40,7 +38,7 @@ document.querySelector("#song-input").addEventListener("change", (event) => {
 });
 
 function playSong() {
-  raf = requestAnimationFrame(updateSlider)
+  raf = setInterval(updateSlider, 10);
   playing = true;
   currSong.play();
   document.querySelector(".play").classList.add("hidden");
@@ -48,7 +46,7 @@ function playSong() {
 }
 
 function pauseSong() {
-  cancelAnimationFrame(raf);
+  clearInterval(raf);
   playing = false;
   currSong.pause();
   document.querySelector(".play").classList.remove("hidden");
