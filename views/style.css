@@ -16,6 +16,7 @@ header {
   text-align: center;
   font-weight: 1000;
   user-select: none;
+  transition: 1s;
 }
 
 footer {
@@ -29,6 +30,7 @@ footer {
   width: 100%;
   height: 100%;
   position: absolute;
+  transition: background 1s;
 }
 
 .background {
@@ -46,12 +48,19 @@ footer {
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 70%;
   margin: 20px auto;
+}
+
+.main #container {
   padding: 10px;
   border-radius: 20px;
   text-align: center;
   background: rgba(250, 250, 250, 0.1);
+  margin-top: auto;
 }
 
 .song-img {
