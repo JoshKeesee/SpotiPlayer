@@ -25,14 +25,14 @@ footer {
 }
 
 .shadow {
-  background: linear-gradient(to bottom, transparent, black);
+  background: linear-gradient(to bottom, black, transparent);
   width: 100%;
   height: 100%;
   position: absolute;
 }
 
 .background {
-  background: limegreen;
+  background: blue;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -59,7 +59,7 @@ footer {
   width: 40%;
   height: 40%;
   transition: border 5s, opacity 500ms;
-  border: 5px solid limegreen;
+  border: 5px solid blue;
   border-radius: 10px;
   box-shadow: 0 0 20px black;
   user-select: none;
@@ -122,14 +122,13 @@ label {
   user-select: none;
   display: inline-block;
   padding: 10px;
-  background: limegreen;
+  background: blue;
   cursor: pointer;
   border-radius: 10px;
   transition: all 200ms;
 }
 
 label:hover {
-  background: green;
   scale: 110%;
 }
 

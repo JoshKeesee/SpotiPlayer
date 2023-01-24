@@ -1,0 +1,18 @@
+{
+  "name": "SpotiPlayer",
+  "short_name": "SpotiPlayer",
+  "description": "Play your Spotify Premium songs online with a cool UI! Includes song covers, auto-adjusting background lighting, and a super-clean, all-device-compatible UI along with it.",
+  "icons": [
+    {
+      "src": "spotify-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "scope": "/",
+  "start_url": "/",
+  "display": "fullscreen",
+  "theme_color": "black",
+  "background_color": "black",
+  "prefer_related_applications": false
+}

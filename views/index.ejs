@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpotiPlayer</title>
     <link rel="stylesheet" href="style.css">
-    <script src="jsmediatags.min.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" href="spotify-logo.png">
+    <link rel="shortcut icon" href="spotify-logo.png" type="image/x-icon">
+    <meta name="theme-color" content="black" />
   </head>
 
   <body>
@@ -13,7 +16,7 @@
     <div class="container">
       <header>SpotiPlayer</header>
       <div class="main">
-        <img class="song-img" src="album-placeholder.png">
+        <img class="song-img" src="album-placeholder.webp">
         <div class="song-info">
           <div class="song-title">Title</div>
           <div class="song-artist">Artist</div>
@@ -51,6 +54,8 @@
       <footer>&copy; SpotiPlayer, Inc. 2023 (Totally)</footer>
     </div>
 
+    <script src="jsmediatags.min.js"></script>
     <script src="app.js"></script>
+    <script src="pwa.js"></script>
   </body>
 </html>
