@@ -7,6 +7,8 @@
 body {
   font-family: 'Ubuntu', sans-serif;
   color: white;
+  background: blue;
+  transition: background 5s;
 }
 
 header {
@@ -16,7 +18,6 @@ header {
   text-align: center;
   font-weight: 1000;
   user-select: none;
-  transition: 1s;
 }
 
 footer {
@@ -28,17 +29,10 @@ footer {
 .shadow {
   background: linear-gradient(to bottom, black, transparent);
   width: 100%;
-  height: 100%;
+  height: fit-content;
+  min-height: 100%;
   position: absolute;
   transition: background 1s;
-}
-
-.background {
-  background: blue;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  transition: 5s;
 }
 
 .container {

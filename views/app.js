@@ -155,7 +155,7 @@ function getSongInfo(song) {
       }, 500);
       document.querySelector(".song-img").onload = () => {
         color = averageColor(document.querySelector(".song-img"));
-        document.querySelector(".background").style.background = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
+        document.querySelector("body").style.background = "rgb(" + color.r + "," + color.g + "," + color.b + ")";
         document.querySelector(".song-img").style.border = "5px solid rgb(" + color.r + "," + color.g + "," + color.b + ")";
         if (playing) {
           currSong.play();
@@ -166,7 +166,7 @@ function getSongInfo(song) {
     },
     onError: function() {
       document.querySelector(".song-img").src = "album-placeholder.png";
-      document.querySelector(".background").style.background = "limegreen";
+      document.querySelector("body").style.background = "limegreen";
       document.querySelector(".song-title").innerText = song.name;
       document.querySelector(".song-artist").innerText = "unknown";
       setTimeout(() => {
